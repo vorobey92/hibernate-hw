@@ -3,24 +3,26 @@ package ru.hh.school.employers;
 import static org.junit.Assert.assertEquals;
 import org.junit.Rule;
 import org.junit.Test;
+
+import java.util.Arrays;
+
 import ru.hh.school.TransactionRule;
-import java.util.List;
 
 public class NPlusOneTest extends EmployerTest {
 
   @Rule
   public TransactionRule transactionRule = new TransactionRule(sessionFactory);
 
-  /**
-   * ToDo Попробуйте модифицировать запрос так, чтобы выполнился 1 запрос
-   *
-   */
   @Test
   public void shouldExecuteOneStatement() {
-    List<Employer> employers = getSession().createQuery("from Employer", Employer.class)
-      .list();
+    //  e.vacancies
+    String query = "select count(v) from Employer e inner join e.vacancies as v group by e";
+    Long[] actualSizes = getSession().createQuery(query, Long.class).list().toArray(Long[]::new);
 
-    employers.forEach((emp) -> emp.getVacancies().size());
+    // Удостоверимся, что наш измененный запрос вернул то, что нужно
+    Arrays.sort(actualSizes);
+    Long[] requiredSizes = new Long[]{1L, 1L, 1L, 3L};
+    assertEquals(requiredSizes, actualSizes);
 
     assertEquals(1L, getSelectCount());
   }
