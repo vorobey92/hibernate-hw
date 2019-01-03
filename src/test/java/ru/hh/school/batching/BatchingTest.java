@@ -21,12 +21,6 @@ public class BatchingTest extends BaseTest {
     TestHelper.execute(pg.getPostgresDatabase(), "delete from resume");
   }
 
-  /**
-   * ToDo доконфигурируйте ru.hh.school.batching.Resume
-   *
-   * @see scripts/create_resume.sql
-   *      и hibernate.properties (раздел batch processing)
-   */
   @Test
   public void fewPersistsShouldBeCombinedIntoBatch() {
     doInTransaction(() -> {
@@ -41,8 +35,6 @@ public class BatchingTest extends BaseTest {
     });
 
     assertEquals(2L, getInsertCount());
-    // при правильной конфигурации в ru.hh.school.batching.Resume
-    // в логах, в разделе Session Metrics, вы увидете "x nanoseconds spent executing y JDBC batches"
   }
 
 }
