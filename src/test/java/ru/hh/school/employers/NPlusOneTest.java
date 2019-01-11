@@ -1,10 +1,13 @@
 package ru.hh.school.employers;
 
 import static org.junit.Assert.assertEquals;
-import org.junit.Rule;
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Rule;
+import org.junit.Test;
 
 import ru.hh.school.TransactionRule;
 
@@ -16,13 +19,14 @@ public class NPlusOneTest extends EmployerTest {
   @Test
   public void shouldExecuteOneStatement() {
     //  e.vacancies
-    String query = "select count(v) from Employer e inner join e.vacancies as v group by e";
-    Long[] actualSizes = getSession().createQuery(query, Long.class).list().toArray(Long[]::new);
+    String query = "from Employer e join fetch e.vacancies";
+    int[] actualSizes = getSession().createQuery(query, Employer.class).stream()
+      .map(Employer::getVacancies).mapToInt(List::size).toArray();
 
     // Удостоверимся, что наш измененный запрос вернул то, что нужно
     Arrays.sort(actualSizes);
-    Long[] requiredSizes = new Long[]{1L, 1L, 1L, 3L};
-    assertEquals(requiredSizes, actualSizes);
+    int[] requiredSizes = new int[]{1, 1, 1, 3};
+    assertTrue(Arrays.equals(actualSizes, requiredSizes));
 
     assertEquals(1L, getSelectCount());
   }
