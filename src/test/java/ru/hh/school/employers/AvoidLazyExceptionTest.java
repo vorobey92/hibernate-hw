@@ -15,7 +15,7 @@ public class AvoidLazyExceptionTest extends EmployerTest {
   @Test
   public void shouldAvoidLazyException() {
     List<Employer> employers = doInTransaction(
-      () -> getSession().createQuery("from Employer", Employer.class).list()
+      () -> getSession().createQuery("from Employer employer left join fetch employer.vacancies", Employer.class).list()
     );
     assertEquals(1L, getSelectCount());
 
