@@ -3,6 +3,7 @@ package ru.hh.school.employers;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+
 import java.util.List;
 
 public class ReturnToManagedStateTest extends EmployerTest {
@@ -23,6 +24,11 @@ public class ReturnToManagedStateTest extends EmployerTest {
 
     // ToDo: тут надо написать код для синхронизации с бд
     // мы могли бы выполнить calculateBonusPoints() внутри транзакции, но предположим, что это дорогая операция
+    // сделаем merge в транзакции. при этом объекты employers останутся в detached состоянии
+    // если необходимы managed entity, то следует использовать сущности, которые вернет Session::merge
+    doInTransaction(
+      () -> employers.forEach(getSession()::merge)
+    );
 
     assertTrue(getAllBonusPointsFromDb() > 0);
   }
