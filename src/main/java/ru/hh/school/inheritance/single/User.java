@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity(name = "UserSingle")
 @Table(name = "user_inheritance_single")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)//Перенес из inheritance.single.Employer
 public class User {
 
   @Id

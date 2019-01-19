@@ -2,6 +2,8 @@ package ru.hh.school.employers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import org.hibernate.Transaction;
 import org.junit.Test;
 import java.util.List;
 
@@ -21,8 +23,17 @@ public class ReturnToManagedStateTest extends EmployerTest {
     // про возврат в managed состояние: https://vladmihalcea.com/jpa-persist-and-merge (часть про merge)
     employers.forEach(Employer::calculateBonusPoints);
 
+
     // ToDo: тут надо написать код для синхронизации с бд
     // мы могли бы выполнить calculateBonusPoints() внутри транзакции, но предположим, что это дорогая операция
+
+    doInTransaction(()->{
+      for(Employer employer:employers){
+        getSession().merge(employer);
+      }
+    });
+
+
 
     assertTrue(getAllBonusPointsFromDb() > 0);
   }
