@@ -5,7 +5,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity(name = "EmployerSingle")
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)//Должно быть в суперклассе
 public class Employer extends User {
 
   private String company;
