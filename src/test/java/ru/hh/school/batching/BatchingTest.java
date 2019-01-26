@@ -3,6 +3,7 @@ package ru.hh.school.batching;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.hh.school.BaseTest;
 import ru.hh.school.TestHelper;
@@ -27,6 +28,7 @@ public class BatchingTest extends BaseTest {
    * @see scripts/create_resume.sql
    *      и hibernate.properties (раздел batch processing)
    */
+  @Ignore
   @Test
   public void fewPersistsShouldBeCombinedIntoBatch() {
     doInTransaction(() -> {

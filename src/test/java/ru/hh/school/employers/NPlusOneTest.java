@@ -1,6 +1,8 @@
 package ru.hh.school.employers;
 
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import ru.hh.school.TransactionRule;
@@ -15,6 +17,7 @@ public class NPlusOneTest extends EmployerTest {
    * ToDo Попробуйте модифицировать запрос так, чтобы выполнился 1 запрос
    *
    */
+  @Ignore
   @Test
   public void shouldExecuteOneStatement() {
     List<Employer> employers = getSession().createQuery("from Employer", Employer.class)

@@ -2,10 +2,8 @@ package ru.hh.school.inheritance;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.Test;
+
+import org.junit.*;
 import ru.hh.school.BaseTest;
 import ru.hh.school.TestHelper;
 import ru.hh.school.TransactionRule;
@@ -37,6 +35,7 @@ public class JoinedTest extends BaseTest {
    *
    * https://docs.jboss.org/hibernate/orm/5.3/userguide/html_single/Hibernate_User_Guide.html#entity-inheritance-joined-table
    */
+  @Ignore
   @Test
   public void saveDifferentTypes() {
     User user = new User();
@@ -56,7 +55,7 @@ public class JoinedTest extends BaseTest {
     // обратите внимание, что в данном случае выполняется по 2 insert-а для подтипов
     assertEquals(5L, getInsertCount());
   }
-
+  @Ignore
   @Test
   public void polymorphicCallsShouldWork() {
     saveDifferentTypes();
