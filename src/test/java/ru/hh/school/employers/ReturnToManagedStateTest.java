@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ReturnToManagedStateTest extends EmployerTest {
 
-  @Ignore
   @Test
   public void shouldSaveNewStateOfEmployerToDb() {
     List<Employer> employers = doInTransaction(
@@ -17,15 +16,13 @@ public class ReturnToManagedStateTest extends EmployerTest {
     );
     assertEquals(1L, getSelectCount());
 
-    // сейчас Employer-ы в detached состоянии, т.к. сессия закрылась.
-    // А состояние employer-ам мы меняем внутри метода calculateBonusPoints()
-    //
-    // про состояния: https://vladmihalcea.com/a-beginners-guide-to-jpa-hibernate-entity-state-transitions/
-    // про возврат в managed состояние: https://vladmihalcea.com/jpa-persist-and-merge (часть про merge)
     employers.forEach(Employer::calculateBonusPoints);
 
-    // ToDo: тут надо написать код для синхронизации с бд
-    // мы могли бы выполнить calculateBonusPoints() внутри транзакции, но предположим, что это дорогая операция
+    doInTransaction( () -> {
+      employers.forEach( (emp) -> {
+        getSession().merge(emp);
+      });
+    });
 
     assertTrue(getAllBonusPointsFromDb() > 0);
   }
