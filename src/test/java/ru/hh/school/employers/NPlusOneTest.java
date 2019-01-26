@@ -13,14 +13,11 @@ public class NPlusOneTest extends EmployerTest {
   @Rule
   public TransactionRule transactionRule = new TransactionRule(sessionFactory);
 
-  /**
-   * ToDo Попробуйте модифицировать запрос так, чтобы выполнился 1 запрос
-   *
-   */
-  @Ignore
   @Test
   public void shouldExecuteOneStatement() {
-    List<Employer> employers = getSession().createQuery("from Employer", Employer.class)
+    List<Employer> employers = getSession().createQuery(
+        "from Employer e " +
+        "join fetch e.vacancies", Employer.class)
       .list();
 
     employers.forEach((emp) -> emp.getVacancies().size());
