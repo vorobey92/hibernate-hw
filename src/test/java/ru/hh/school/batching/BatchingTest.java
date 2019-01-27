@@ -3,7 +3,6 @@ package ru.hh.school.batching;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import ru.hh.school.BaseTest;
 import ru.hh.school.TestHelper;
@@ -22,19 +21,11 @@ public class BatchingTest extends BaseTest {
     TestHelper.execute(pg.getPostgresDatabase(), "delete from resume");
   }
 
-  /**
-   * ToDo доконфигурируйте ru.hh.school.batching.Resume
-   *
-   * @see scripts/create_resume.sql
-   *      и hibernate.properties (раздел batch processing)
-   */
-  @Ignore
   @Test
   public void fewPersistsShouldBeCombinedIntoBatch() {
     doInTransaction(() -> {
       for (int i = 1; i <= 20; i++) {
         getSession().persist(new Resume("superResume" + i));
-
         if (i % JDBC_BATCH_SIZE == 0) {
           getSession().flush();
           getSession().clear();
@@ -43,8 +34,6 @@ public class BatchingTest extends BaseTest {
     });
 
     assertEquals(2L, getInsertCount());
-    // при правильной конфигурации в ru.hh.school.batching.Resume
-    // в логах, в разделе Session Metrics, вы увидете "x nanoseconds spent executing y JDBC batches"
   }
 
 }
