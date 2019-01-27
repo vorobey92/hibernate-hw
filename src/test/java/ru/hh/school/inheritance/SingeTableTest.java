@@ -28,12 +28,6 @@ public class SingeTableTest extends BaseTest {
     TestHelper.execute(pg.getPostgresDatabase(), "delete from user_inheritance_single");
   }
 
-  /**
-   * ToDo создайте нужную структуру таблицы в файле scripts/create_user_inheritance_single.sql
-   *
-   * https://docs.jboss.org/hibernate/orm/5.3/userguide/html_single/Hibernate_User_Guide.html#entity-inheritance-single-table
-   */
-  @Ignore
   @Test
   public void saveDifferentTypes() {
     User user = new User();
@@ -52,7 +46,7 @@ public class SingeTableTest extends BaseTest {
 
     assertEquals(3L, getInsertCount());
   }
-  @Ignore
+
   @Test
   public void polymorphicCallsShouldWork() {
     saveDifferentTypes();
