@@ -12,7 +12,7 @@ public class StatisticsDto {
   private final long employerCount;
   private final long totalBonuses;
 
-  public StatisticsDto() {
+  StatisticsDto() {
     employerCount = 0;
     totalBonuses = 0;
   };

@@ -29,7 +29,7 @@ public class User {
   @Column(name = "last_name") 
   private String lastName;
 
-  public User() {
+  User() {
   }
     
   public User(String firstName, String lastName) {
