@@ -30,12 +30,6 @@ public class TableStrategyTest extends BaseTest {
     TestHelper.execute(pg.getPostgresDatabase(), "delete from applicant_inheritance_table");
   }
 
-  /**
-   * ToDo создайте нужные таблицы в файле scripts/create_user_inheritance_table.sql
-   *
-   * https://docs.jboss.org/hibernate/orm/5.3/userguide/html_single/Hibernate_User_Guide.html#entity-inheritance-table-per-class
-   */
-  @Ignore
   @Test
   public void saveDifferentTypes() {
     User user = new User();
@@ -57,7 +51,7 @@ public class TableStrategyTest extends BaseTest {
     // обратите внимание, что в данном случае выполняется по 1 insert-у
     assertEquals(3L, getInsertCount());
   }
-  @Ignore
+
   @Test
   public void polymorphicCallsShouldWork() {
     saveDifferentTypes();
