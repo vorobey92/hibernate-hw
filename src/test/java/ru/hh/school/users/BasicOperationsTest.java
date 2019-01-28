@@ -44,7 +44,7 @@ public class BasicOperationsTest extends BaseTest {
     User extractedUser = getSession().get(User.class, user.getId());
     assertNotNull(extractedUser);
 
-    sessionFactory.getCurrentSession().delete(extractedUser);
+    getSession().delete(extractedUser);
 
     extractedUser = getSession().get(User.class, user.getId());
     assertNull(extractedUser);

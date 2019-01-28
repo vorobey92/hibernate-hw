@@ -3,7 +3,6 @@ package ru.hh.school.employers;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.hibernate.transform.Transformers;
 import org.junit.Test;
 
 public class DtoMappingTest extends EmployerTest {
