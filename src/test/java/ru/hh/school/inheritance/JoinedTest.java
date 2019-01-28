@@ -30,12 +30,6 @@ public class JoinedTest extends BaseTest {
     TestHelper.execute(pg.getPostgresDatabase(), "delete from applicant_inheritance_joined");
   }
 
-  /**
-   * ToDo создайте нужные таблицы в файле scripts/create_user_inheritance_joined.sql
-   *
-   * https://docs.jboss.org/hibernate/orm/5.3/userguide/html_single/Hibernate_User_Guide.html#entity-inheritance-joined-table
-   */
-  @Ignore
   @Test
   public void saveDifferentTypes() {
     User user = new User();
@@ -55,7 +49,7 @@ public class JoinedTest extends BaseTest {
     // обратите внимание, что в данном случае выполняется по 2 insert-а для подтипов
     assertEquals(5L, getInsertCount());
   }
-  @Ignore
+
   @Test
   public void polymorphicCallsShouldWork() {
     saveDifferentTypes();
