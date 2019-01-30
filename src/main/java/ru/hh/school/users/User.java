@@ -11,30 +11,30 @@ import javax.persistence.Column;
 @Table(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name="user_id")
+  private Integer id;
 
-    @Column(name="first_name")
-    private String firstName;
+  @Column(name="first_name")
+  private String firstName;
 
-    @Column(name="last_name")
-    private String lastName;
+  @Column(name="last_name")
+  private String lastName;
 
-    private User() {}
+  private User() {}
 
-    public User(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+  public User(String firstName, String lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 
-    public Integer getId() {
-        return id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
 }
