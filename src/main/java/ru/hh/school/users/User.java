@@ -22,7 +22,7 @@ public class User {
   @Column(name="last_name")
   private String lastName;
 
-  private User() {}
+  User() {}
 
   public User(String firstName, String lastName) {
     this.firstName = firstName;

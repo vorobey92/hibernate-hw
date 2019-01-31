@@ -23,11 +23,7 @@ public class ReturnToManagedStateTest extends EmployerTest {
     employers.forEach(Employer::calculateBonusPoints);
 
     doInTransaction(
-      () -> {
-        for (Employer employer : employers) {
-          getSession().replicate(employer, ReplicationMode.OVERWRITE);
-        }
-      }
+      () -> employers.forEach(getSession()::merge)
     );
 
     assertTrue(getAllBonusPointsFromDb() > 0);
