@@ -12,11 +12,6 @@ public class StatisticsDto {
   private final long employerCount;
   private final long totalBonuses;
 
-  StatisticsDto() {
-    employerCount = 0;
-    totalBonuses = 0;
-  };
-
   public StatisticsDto(long employerCount, long totalBonuses) {
     this.employerCount = employerCount;
     this.totalBonuses = totalBonuses;

@@ -6,10 +6,10 @@ create table user_inheritance_joined (
 
 create table employer_inheritance_joined (
     id INTEGER PRIMARY KEY REFERENCES user_inheritance_joined(id),
-    company VARCHAR(200)
+    company VARCHAR(200) NOT NULL
 );
 
 create table applicant_inheritance_joined (
     id INTEGER PRIMARY KEY REFERENCES user_inheritance_joined(id),
-    position VARCHAR(200)
+    position VARCHAR(200) NOT NULL
 );

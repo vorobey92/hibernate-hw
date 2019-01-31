@@ -1,6 +1,5 @@
 package ru.hh.school.inheritance.single;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +11,6 @@ import javax.persistence.Table;
 @Entity(name = "UserSingle")
 @Table(name = "user_inheritance_single")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorValue("User")
 public class User {
 
   @Id

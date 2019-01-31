@@ -3,7 +3,6 @@ package ru.hh.school.employers;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.hibernate.Transaction;
 import org.junit.Test;
 import java.util.List;
 
@@ -25,9 +24,9 @@ public class ReturnToManagedStateTest extends EmployerTest {
 
     // ToDo: тут надо написать код для синхронизации с бд
     // мы могли бы выполнить calculateBonusPoints() внутри транзакции, но предположим, что это дорогая операция
-    Transaction transaction = getSession().beginTransaction();
-    employers.forEach(getSession()::merge);
-    transaction.commit();
+    doInTransaction(
+      () -> employers.forEach(getSession()::merge)
+    );
 
     assertTrue(getAllBonusPointsFromDb() > 0);
   }
