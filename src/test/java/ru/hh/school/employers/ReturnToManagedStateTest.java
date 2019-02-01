@@ -2,7 +2,9 @@ package ru.hh.school.employers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+
 import java.util.List;
 
 public class ReturnToManagedStateTest extends EmployerTest {
@@ -10,7 +12,7 @@ public class ReturnToManagedStateTest extends EmployerTest {
   @Test
   public void shouldSaveNewStateOfEmployerToDb() {
     List<Employer> employers = doInTransaction(
-      () -> getSession().createQuery("from Employer", Employer.class).list()
+        () -> getSession().createQuery("from Employer", Employer.class).list()
     );
     assertEquals(1L, getSelectCount());
 
@@ -21,7 +23,7 @@ public class ReturnToManagedStateTest extends EmployerTest {
     // про возврат в managed состояние: https://vladmihalcea.com/jpa-persist-and-merge (часть про merge)
     employers.forEach(Employer::calculateBonusPoints);
 
-    // ToDo: тут надо написать код для синхронизации с бд
+    doInTransaction(() -> employers.forEach(employer -> getSession().merge(employer)));
     // мы могли бы выполнить calculateBonusPoints() внутри транзакции, но предположим, что это дорогая операция
 
     assertTrue(getAllBonusPointsFromDb() > 0);
@@ -29,7 +31,7 @@ public class ReturnToManagedStateTest extends EmployerTest {
 
   private Long getAllBonusPointsFromDb() {
     return doInTransaction(
-      () -> getSession().createQuery("select sum(bonusPoints) from Employer", Long.class).uniqueResult()
+        () -> getSession().createQuery("select sum(bonusPoints) from Employer", Long.class).uniqueResult()
     );
   }
 
