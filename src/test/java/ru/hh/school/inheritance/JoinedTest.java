@@ -65,7 +65,7 @@ public class JoinedTest extends BaseTest {
       .map(User::generateGreeting)
       .collect(Collectors.toSet());
 
-    // обратите внимание на сгенирированный хибернейтом запрос (импользуются join-ы)
+    // обратите внимание на сгенирированный хибернейтом запрос (используются join-ы)
     assertEquals(1L, getSelectCount());
     assertTrue(userGreetings.contains("Hello, John Doe"));
     assertTrue(userGreetings.contains("Hello, John Employer from HH"));
