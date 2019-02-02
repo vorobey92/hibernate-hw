@@ -15,9 +15,17 @@ public class NPlusOneTest extends EmployerTest {
    * ToDo Попробуйте модифицировать запрос так, чтобы выполнился 1 запрос
    *
    */
+
+  // Если менять можно только здесь, то придётся делать JOIN`ы
+  // а вообще в таких случаях можно определить тип связи
+  // public class Employer {
+  // ...
+  // @OneToMany(mappedBy = "employer", fetch = FetchType.EAGER)
+  // private List<Vacancy> vacancies = new ArrayList<>();
+
   @Test
   public void shouldExecuteOneStatement() {
-    List<Employer> employers = getSession().createQuery("from Employer", Employer.class)
+    List<Employer> employers = getSession().createQuery("from Employer employer join fetch employer.vacancies Vacancy", Employer.class)
       .list();
 
     employers.forEach((emp) -> emp.getVacancies().size());
