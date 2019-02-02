@@ -12,10 +12,13 @@ public class AvoidLazyExceptionTest extends EmployerTest {
    *
    * https://vladmihalcea.com/the-best-way-to-handle-the-lazyinitializationexception/
    */
+
+  // здесь, вроде, та же тема, будем джойнить.
+
   @Test
   public void shouldAvoidLazyException() {
     List<Employer> employers = doInTransaction(
-      () -> getSession().createQuery("from Employer", Employer.class).list()
+      () -> getSession().createQuery("from Employer employer join fetch employer.vacancies Vacancy", Employer.class).list()
     );
     assertEquals(1L, getSelectCount());
 
