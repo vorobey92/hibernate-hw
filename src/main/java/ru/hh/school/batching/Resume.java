@@ -1,12 +1,10 @@
 package ru.hh.school.batching;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 @Entity
-@Table
+@Table (name = "resume")
 public class Resume {
 
   @Id
@@ -15,9 +13,13 @@ public class Resume {
   // Подробнее:
   // https://vladmihalcea.com/how-to-batch-insert-and-update-statements-with-hibernate/
   // https://vladmihalcea.com/from-jpa-to-hibernates-legacy-and-enhanced-identifier-generators/
-  @GeneratedValue(/* здесь место для вашего кода */)
-  private Integer id;
+  @Column (name = "id")
+  @SequenceGenerator(name = "mySeqGen", sequenceName = "resume_id_seq",
+          allocationSize = 10)
+  @GeneratedValue(generator = "mySeqGen")
+  private int id;
 
+  @Column (name = "description")
   private String description;
 
   Resume() {}
