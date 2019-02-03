@@ -3,6 +3,8 @@ package ru.hh.school.users;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+
+import org.hibernate.Session;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -41,6 +43,8 @@ public class BasicOperationsTest extends BaseTest {
     // https://vladmihalcea.com/jpa-persist-and-merge
     // ToDo сохраните пользователя
 
+    getSession().persist(user);
+
     assertEquals(1L, getInsertCount());
     assertEquals(user, getSession().get(User.class, user.getId()));
   }
@@ -54,6 +58,7 @@ public class BasicOperationsTest extends BaseTest {
     assertNotNull(extractedUser);
 
     // todo удалите пользователя
+    getSession().delete(user);
 
     extractedUser = getSession().get(User.class, user.getId());
     assertNull(extractedUser);
