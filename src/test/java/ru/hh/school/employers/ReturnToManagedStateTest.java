@@ -21,8 +21,9 @@ public class ReturnToManagedStateTest extends EmployerTest {
     // про возврат в managed состояние: https://vladmihalcea.com/jpa-persist-and-merge (часть про merge)
     employers.forEach(Employer::calculateBonusPoints);
 
-    // ToDo: тут надо написать код для синхронизации с бд
     // мы могли бы выполнить calculateBonusPoints() внутри транзакции, но предположим, что это дорогая операция
+    doInTransaction(() -> employers
+            .forEach( (employer) -> getSession().merge(employer)));
 
     assertTrue(getAllBonusPointsFromDb() > 0);
   }
