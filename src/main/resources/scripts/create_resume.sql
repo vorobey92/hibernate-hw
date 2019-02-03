@@ -1,3 +1,6 @@
+drop sequence if exists resume_id_seq cascade;
+drop table if exists resume cascade;
+
 create sequence resume_id_seq
   minvalue 1
   start with 1
