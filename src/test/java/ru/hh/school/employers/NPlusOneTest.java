@@ -17,7 +17,7 @@ public class NPlusOneTest extends EmployerTest {
    */
   @Test
   public void shouldExecuteOneStatement() {
-    List<Employer> employers = getSession().createQuery("from Employer", Employer.class)
+    List<Employer> employers = getSession().createQuery("from Employer emp JOIN FETCH emp.vacancies", Employer.class)
       .list();
 
     employers.forEach((emp) -> emp.getVacancies().size());
