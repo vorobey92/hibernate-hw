@@ -7,7 +7,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import ru.hh.school.TransactionRule;
 
-import java.nio.channels.SeekableByteChannel;
 import java.util.List;
 
 public class NPlusOneTest extends EmployerTest {
@@ -21,7 +20,6 @@ public class NPlusOneTest extends EmployerTest {
    */
   @Test
   public void shouldExecuteOneStatement() {
-    Session session = getSession();
     List<Employer> employers = getSession().createQuery("from Employer employer join fetch employer.vacancies Vacancy")
       .list();
 

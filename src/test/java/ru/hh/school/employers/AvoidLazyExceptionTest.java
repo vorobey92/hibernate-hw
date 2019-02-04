@@ -21,8 +21,6 @@ public class AvoidLazyExceptionTest extends EmployerTest {
       () -> getSession().createQuery("from Employer employer join fetch employer.vacancies Vacancy").list()
     );
     assertEquals(1L, getSelectCount());
-    Session session = getSession();
-    Transaction tx = session.beginTransaction();
 
     // сейчас Employer-ы в detached состоянии, т.к. сессия закрылась
     int totalVacancies = employers.stream()
