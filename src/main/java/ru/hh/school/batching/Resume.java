@@ -13,13 +13,10 @@ public class Resume {
   // Подробнее:
   // https://vladmihalcea.com/how-to-batch-insert-and-update-statements-with-hibernate/
   // https://vladmihalcea.com/from-jpa-to-hibernates-legacy-and-enhanced-identifier-generators/
-  @Column (name = "id")
-  @SequenceGenerator(name = "mySeqGen", sequenceName = "resume_id_seq",
-          allocationSize = 10)
+  @SequenceGenerator(name = "mySeqGen", sequenceName = "resume_id_seq", allocationSize = 10)
   @GeneratedValue(generator = "mySeqGen")
   private int id;
 
-  @Column (name = "description")
   private String description;
 
   Resume() {}
