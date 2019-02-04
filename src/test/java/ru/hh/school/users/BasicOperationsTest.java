@@ -36,7 +36,7 @@ public class BasicOperationsTest extends BaseTest {
   public void saveNewUserShouldInsertDbRow() {
     // ToDo оформите entity User
     User user = new User("John", "Lennon");
-
+    getSession().persist(user);
     // https://stackoverflow.com/questions/5862680/whats-the-advantage-of-persist-vs-save-in-hibernate
     // https://vladmihalcea.com/jpa-persist-and-merge
     // ToDo сохраните пользователя
@@ -53,7 +53,7 @@ public class BasicOperationsTest extends BaseTest {
     User extractedUser = getSession().get(User.class, user.getId());
     assertNotNull(extractedUser);
 
-    // todo удалите пользователя
+    getSession().delete(user);
 
     extractedUser = getSession().get(User.class, user.getId());
     assertNull(extractedUser);

@@ -2,6 +2,9 @@ package ru.hh.school.employers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.Test;
 import java.util.List;
 
@@ -15,7 +18,7 @@ public class AvoidLazyExceptionTest extends EmployerTest {
   @Test
   public void shouldAvoidLazyException() {
     List<Employer> employers = doInTransaction(
-      () -> getSession().createQuery("from Employer", Employer.class).list()
+      () -> getSession().createQuery("from Employer employer join fetch employer.vacancies Vacancy").list()
     );
     assertEquals(1L, getSelectCount());
 
