@@ -68,7 +68,7 @@ public class TableStrategyTest extends BaseTest {
       .map(User::generateGreeting)
       .collect(Collectors.toSet());
 
-    // обратите внимание на сгенирированный хибернейтом запрос (импользуются union all-ы)
+    // обратите внимание на сгенирированный хибернейтом запрос (используются union all-ы)
     assertEquals(1L, getSelectCount());
     assertTrue(userGreetings.contains("Hello, John Doe"));
     assertTrue(userGreetings.contains("Hello, John Employer from HH"));
