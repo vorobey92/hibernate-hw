@@ -22,7 +22,6 @@ public class BatchingTest extends BaseTest {
   }
 
   /**
-   * ToDo доконфигурируйте ru.hh.school.batching.Resume
    *
    * @see scripts/create_resume.sql
    *      и hibernate.properties (раздел batch processing)
@@ -43,6 +42,7 @@ public class BatchingTest extends BaseTest {
     assertEquals(2L, getInsertCount());
     // при правильной конфигурации в ru.hh.school.batching.Resume
     // в логах, в разделе Session Metrics, вы увидете "x nanoseconds spent executing y JDBC batches"
+    // так точно
   }
 
 }

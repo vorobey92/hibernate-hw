@@ -2,6 +2,8 @@ package ru.hh.school.batching;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,12 +12,12 @@ import javax.persistence.Table;
 public class Resume {
 
   @Id
-  // ToDo сделать так, чтобы id брался из sequence-а
   // таким образом, мы сможем отправлять в бд запросы батчами.
   // Подробнее:
   // https://vladmihalcea.com/how-to-batch-insert-and-update-statements-with-hibernate/
   // https://vladmihalcea.com/from-jpa-to-hibernates-legacy-and-enhanced-identifier-generators/
-  @GeneratedValue(/* здесь место для вашего кода */)
+  @GeneratedValue(generator = "resume_id_seq", strategy=GenerationType.SEQUENCE)
+  @SequenceGenerator(name = "resume_id_seq", allocationSize = 10)
   private Integer id;
 
   private String description;

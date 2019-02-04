@@ -3,6 +3,7 @@ package ru.hh.school.inheritance.table;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -15,6 +16,7 @@ public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
+  @SequenceGenerator(name = "user_id_seq", allocationSize = 10)
   private Integer id;
 
   private String name;
