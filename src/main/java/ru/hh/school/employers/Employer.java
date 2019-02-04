@@ -1,7 +1,5 @@
 package ru.hh.school.employers;
 
-import org.hibernate.FetchMode;
-
 import static java.time.LocalDateTime.now;
 import static java.time.temporal.ChronoUnit.DAYS;
 
