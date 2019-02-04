@@ -24,15 +24,7 @@ public class ReturnToManagedStateTest extends EmployerTest {
     employers.forEach(Employer::calculateBonusPoints);
 
     // ToDo: тут надо написать код для синхронизации с бд
-    List<Employer> updatedEmployers = doInTransaction(
-            () -> {
-              Session session = getSession();
-              for(Employer e: employers) {
-                session.merge(e);
-              }
-              return employers;
-            }
-    );
+    doInTransaction(() -> employers.forEach(x -> getSession().merge(x)));
 
     assertTrue(getAllBonusPointsFromDb() > 0);
   }
