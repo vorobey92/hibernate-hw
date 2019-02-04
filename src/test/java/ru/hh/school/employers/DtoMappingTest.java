@@ -6,13 +6,15 @@ import org.junit.Test;
 
 public class DtoMappingTest extends EmployerTest {
 
+  private static final String STATS =
+          "select new ru.hh.school.employers.StatisticsDto(count(e.id), sum(e.bonusPoints)) from Employer e";
+
   @Test
   public void mapQueryResultToDto() {
     StatisticsDto dto = doInTransaction(() ->
       // ToDo дополните запрос, чтобы возвращался ru.hh.school.employers.StatisticsDto
       // https://vladmihalcea.com/the-best-way-to-map-a-projection-query-to-a-dto-with-jpa-and-hibernate/
-      getSession().createQuery(
-        "select count(e.id), sum(e.bonusPoints) from Employer e", StatisticsDto.class)
+      getSession().createQuery(STATS, StatisticsDto.class)
         .getSingleResult()
     );
 

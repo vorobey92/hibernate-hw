@@ -1,6 +1,8 @@
 package ru.hh.school.employers;
 
 import static org.junit.Assert.assertEquals;
+
+import org.hibernate.jpa.QueryHints;
 import org.junit.Rule;
 import org.junit.Test;
 import ru.hh.school.TransactionRule;
@@ -18,7 +20,8 @@ public class NPlusOneTest extends EmployerTest {
   @Test
   public void shouldExecuteOneStatement() {
     List<Employer> employers = getSession().createQuery("from Employer", Employer.class)
-      .list();
+      .setHint(QueryHints.HINT_FETCHGRAPH, getSession().getEntityManagerFactory().createEntityManager().getEntityGraph("Employer.vacancies"))
+      .getResultList();
 
     employers.forEach((emp) -> emp.getVacancies().size());
 
