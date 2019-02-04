@@ -22,8 +22,7 @@ public class ReturnToManagedStateTest extends EmployerTest {
     employers.forEach(Employer::calculateBonusPoints);
 
     // мы могли бы выполнить calculateBonusPoints() внутри транзакции, но предположим, что это дорогая операция
-    doInTransaction(() -> employers
-            .forEach( (employer) -> getSession().merge(employer)));
+    doInTransaction(() -> employers.forEach(getSession()::merge));
 
     assertTrue(getAllBonusPointsFromDb() > 0);
   }

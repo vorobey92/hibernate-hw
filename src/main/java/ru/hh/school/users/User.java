@@ -20,6 +20,8 @@ public class User {
     this.lastName = lastName;
   }
 
+  User(){}
+
   public Integer getId() {
     return id;
   }
