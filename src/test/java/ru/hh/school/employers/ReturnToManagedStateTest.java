@@ -26,14 +26,7 @@ public class ReturnToManagedStateTest extends EmployerTest {
         // мы могли бы выполнить calculateBonusPoints() внутри транзакции, но предположим, что это дорогая операция
 
         // просто дёргаем для каждого Employer`а merge
-        doInTransaction(
-                () -> {
-                    Session session = getSession();
-                    for (Employer e : employers) {
-                        session.merge(e);
-                    }
-                }
-        );
+        doInTransaction(() -> employers.forEach(getSession()::merge));
 
         assertTrue(getAllBonusPointsFromDb() > 0);
     }

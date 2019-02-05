@@ -2,15 +2,15 @@
 
 create table user_inheritance_joined (
     id SERIAL PRIMARY KEY,
-    name VARCHAR
+    name VARCHAR (32) NOT NULL
 );
 
 create table employer_inheritance_joined (
    id INT PRIMARY KEY REFERENCES user_inheritance_joined(id),
-    company VARCHAR
+    company VARCHAR (32) NOT NULL
 );
 
 create table applicant_inheritance_joined (
     id INT PRIMARY KEY REFERENCES user_inheritance_joined(id),
-    position VARCHAR
+    position VARCHAR (32) NOT NULL
 );
