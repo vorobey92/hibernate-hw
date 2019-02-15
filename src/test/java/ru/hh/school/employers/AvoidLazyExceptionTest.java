@@ -15,8 +15,9 @@ public class AvoidLazyExceptionTest extends EmployerTest {
   @Test
   public void shouldAvoidLazyException() {
     List<Employer> employers = doInTransaction(
-      () -> getSession().createQuery("from Employer", Employer.class).list()
-    );
+    	      () -> getSession().createQuery("from Employer emp join fetch emp.vacancies", Employer.class).list()
+    	    );
+    
     assertEquals(1L, getSelectCount());
 
     // сейчас Employer-ы в detached состоянии, т.к. сессия закрылась
