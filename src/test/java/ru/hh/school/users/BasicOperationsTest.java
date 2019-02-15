@@ -40,7 +40,8 @@ public class BasicOperationsTest extends BaseTest {
     // https://stackoverflow.com/questions/5862680/whats-the-advantage-of-persist-vs-save-in-hibernate
     // https://vladmihalcea.com/jpa-persist-and-merge
     // ToDo сохраните пользователя
-
+    getSession().persist(user);
+    
     assertEquals(1L, getInsertCount());
     assertEquals(user, getSession().get(User.class, user.getId()));
   }
@@ -54,7 +55,8 @@ public class BasicOperationsTest extends BaseTest {
     assertNotNull(extractedUser);
 
     // todo удалите пользователя
-
+    getSession().delete(user);
+    
     extractedUser = getSession().get(User.class, user.getId());
     assertNull(extractedUser);
   }
@@ -92,7 +94,7 @@ public class BasicOperationsTest extends BaseTest {
     User extractedUser = getSession().createQuery("from User where id = :userId", User.class)
       .setParameter("userId", user.getId())
       .getSingleResult();
-
+    
     // обратите внимание, что в данном случае хибер обновил запись в бд (из-за измененного имени)
     // и сходил за пользователем в БД (а не в кеш 1го уровня)
     // https://vladmihalcea.com/a-beginners-guide-to-jpahibernate-flush-strategies/

@@ -23,7 +23,13 @@ public class ReturnToManagedStateTest extends EmployerTest {
 
     // ToDo: тут надо написать код для синхронизации с бд
     // мы могли бы выполнить calculateBonusPoints() внутри транзакции, но предположим, что это дорогая операция
+  doInTransaction(
+    () -> employers.forEach(
+    		(emp) -> getSession().merge(emp))
+  );
 
+    
+    
     assertTrue(getAllBonusPointsFromDb() > 0);
   }
 
